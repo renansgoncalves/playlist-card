@@ -1,21 +1,154 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
   <title>Playlist Card</title>
   <style>
-  
+    /* Reset básico e Fontes */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      letter-spacing: -1px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 2160px;
+      height: 5120px;
+    }
+
+    /* O card principal */
+    #card-container {
+      width: 1620px;
+      border-radius: 64px;
+      padding: 64px;
+      color: #fff;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      box-shadow: 0 64px 128px rgba(0,0,0,0.25);
+    }
+
+    /* Header com a imagem e título da playlist */
+    .header {
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      align-items: flex-end;
+      gap: 40px;
+      margin-bottom: 24px;
+    }
+    #playlistCover {
+      width: 360px;
+      height: 360px;
+      border-radius: 16px;
+    }
+    .header h1 {
+      font-size: 72px;
+      letter-spacing: -3px;
+      font-weight: 900;
+      margin-block: 8px;
+      line-height: 1.1;
+    }
+    #profile-info {
+      display: flex;
+      align-items: center;
+      opacity: 60%;
+    }
+    #profileImg {
+      width: 52px;
+      height: 52px;
+      margin-block: 16px;
+      margin-inline-end: 8px;
+    }
+    .header p, .header c {
+      font-size: 34px;
+      margin-inline: 8px;
+    }
+    .header p:last-child, .header c {
+      opacity: 35%;
+    }
+
+
+    /* Lista de músicas em duas colunas */
+    .tracks-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .tracks-col, .track-item {
+      gap: 28px;
+    }
+    .tracks-col {
+      display: flex;
+      flex-direction: column;
+      flex: 1;        /* cada coluna ocupa metade do espaço */
+      min-width: 0;   /* necessário para ellipsis funcionar */
+    }
+
+    .track-item {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .track-item img {
+      width: 104px;
+      height: 104px;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .track-info {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      max-width: calc(100% - 96px - 28px - 28px - 64px);
+      overflow: hidden;
+    }
+
+    .track-title, .track-artist {
+      font-family: 'Nunito', sans-serif;
+      white-space: nowrap;    /* impede quebra de linha */
+      overflow: hidden;       /* esconde o que ultrapassa */
+      text-overflow: ellipsis;/* adiciona "..." */
+    }
+
+    .track-title {
+      font-size: 44px;
+      font-weight: bold;
+    }
+
+    .track-artist {
+      font-size: 40px;
+      color: #b3b3b3;
+    }
   </style>
 </head>
-<body>
-  <div id="card-container">
+<body style="background-color: #121212;">
+  <div id="card-container" style="background-color: #282828;">
     <div class="header">
-      <img src="{{playlistCoverUrl}}" alt="Playlist Cover">
-      <h1>{{playlistName}}</h1>
+      <img id="playlistCover" src="{{playlistCoverUrl}}" alt="Capa da Playlist">
+      <div class="playlist-info">
+        <h1>{{playlistName}}</h1>
+        <div id="profile-info">
+          <img id="profileImg" src=""/>
+          <p>{{playlistOwner}}</p>
+          <c>•</c>
+          <p>Playlist</p>
+        </div>
+      </div>
     </div>
-    <div class="tracks-grid">
-      {{tracks}}
+    <div class="tracks-columns">
+      <div class="tracks-col">
+        {{col1}}
+      </div>
+      <div class="tracks-col">
+        {{col2}}
+      </div>
     </div>
   </div>
 </body>
